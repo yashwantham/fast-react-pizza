@@ -5,8 +5,8 @@ import Home from "./ui/Home";
 import Error from "./ui/Error";
 import Menu, {loader as menuLoader} from "./features/menu/Menu";
 import Cart from "./features/cart/Cart";
-import CreateOrder from "./features/order/CreateOrder";
-import Order from "./features/order/Order";
+import CreateOrder, {action as createOrderAction} from "./features/order/CreateOrder";
+import Order, {loader as orderLoader} from "./features/order/Order";
 import AppLayout from './ui/AppLayout';
 
 // This way of defining routers is necessary in react router 6.4 in order to enable data fetching and data loading with react router 
@@ -31,11 +31,14 @@ const router = createBrowserRouter([
       },
       {
         path: "/order/new",
-        element: <CreateOrder />
+        element: <CreateOrder />,
+        action: createOrderAction
       },
       {
         path: "/order/:orderId",
-        element: <Order />
+        element: <Order />,
+        loader: orderLoader,
+        errorElement: <Error />,
       }
     ]
   }
